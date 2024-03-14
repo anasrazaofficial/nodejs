@@ -14,3 +14,6 @@ This repository is for the learning purpose of JavaScript Backend
 ### Middleware
 Middleware works between request and response.
 - If we don't run the next method then the next part of code will not be executed
+
+### EJS
+EJS(Embedded JavaScript) is a popular template engine for Node. js and web development. It allows you to generate dynamic HTML content by embedding JavaScript code within your HTML templates.
