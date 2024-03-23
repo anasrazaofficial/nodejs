@@ -32,3 +32,27 @@ EJS(Embedded JavaScript) is a popular template engine for Node. js and web devel
 3. require    = function to use modules (CommonJS)
 4. module     = info about current module (file)
 5. process    = info about env where the program is being execute
+
+### Buitin modules
+Some of the Buitin modules are:
+#### OS
+This module is used to get information about the operating system
+- `userInfo()`  = Gives information about the user
+- `uptime()`    = Tells the time how long the system is running
+- `totalmem()`  = Returns the total memory
+- `freemem()` = Returns the free memory
+
+#### path
+This module is used to get information about the path
+- `sep`     = Returns the path separator
+- `join(path1,path2,...)`  = Joins the path with given arguments
+- `basename(path)` = Returns the basename of the given path
+- `resolve(path1,path2,...)` = Returns the absolute path
+
+#### fs
+- `readFileSync(path, type(utf-8, ascii ,etc.))` = Reads the contents of the file from the given path.
+- `writeFileSync(path, content, appendcontent)` = Writes the contents of the file to the given path. The third argument is optional if it is {flag:'a'} then the given content will be added to the already existing content
+- `readFile(path, type(utf-8, ascii ,etc.),callback(error,result))` = Reads the contents of the file from the given path
+- `writeFile(path, content, appendcontent,,callback(error,result))` = Writes the contents of the file to the given path. The third argument is optional if it is {flag:'a'} then the given content will be added to the already existing content
+
+>Note: `readFileSync` and `writeFileSync` are synchronous, if the files are huge or there are multiple processes of reading or writing, the system will be slow down, while `readFile` and `writeFile` are asynchronous. They will wait for the response and then execute the code just like promises.
