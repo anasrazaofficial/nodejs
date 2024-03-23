@@ -56,3 +56,10 @@ This module is used to get information about the path
 - `writeFile(path, content, appendcontent,,callback(error,result))` = Writes the contents of the file to the given path. The third argument is optional if it is {flag:'a'} then the given content will be added to the already existing content
 
 >Note: `readFileSync` and `writeFileSync` are synchronous, if the files are huge or there are multiple processes of reading or writing, the system will be slow down, while `readFile` and `writeFile` are asynchronous. They will wait for the response and then execute the code just like promises.
+
+#### http
+- `createServer(callback(req ,res))` = Create a server
+- `listen(port)` = Listen on the given port
+- `res.write(content)` = Shows the content on the webpage on given port
+- `res.end()` = Returns the server response
+- `req.url` = Returns the url of the request
