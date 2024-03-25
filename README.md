@@ -25,6 +25,8 @@ EJS(Embedded JavaScript) is a popular template engine for Node. js and web devel
 ## Course 2 (Free Code Camp)
 - REPL is a term in nodejs which stands for: Read, Evaluate, Print and Loop.
 - We cannot use `window` and `document` object in NodeJS
+- `dependencies` includes packages needed for the application to run in a production environment, while `devDependencies` includes packages required during development and testing but are not necessary for the production deployment.
+- `npm uninstall <packagename>` = Uninstalls the given package
 
 ### Some Global Variables
 1. __dirname  = path to current directory
