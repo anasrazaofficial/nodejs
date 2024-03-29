@@ -65,3 +65,11 @@ This module is used to get information about the path
 - `res.write(content)` = Shows the content on the webpage on given port
 - `res.end()` = Returns the server response
 - `req.url` = Returns the url of the request
+
+
+### Event Loop
+- Js in single threaded because it runs the code line by line which is also called non-blocking
+- Event Loop is basically the same as settimeout which runs after when the code is executed for avoiding time issues.
+- The part of the code that runs in the end asynchronously is called the offloaded code
+
+>Course api: https://course-api.com/slides.html
