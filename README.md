@@ -71,5 +71,10 @@ This module is used to get information about the path
 - Js in single threaded because it runs the code line by line which is also called non-blocking
 - Event Loop is basically the same as settimeout which runs after when the code is executed for avoiding time issues.
 - The part of the code that runs in the end asynchronously is called the offloaded code
+#### Examples:
+1. readfile
+2. setTimeout
+3. setInterval<br>
+and more...
 
 >Course api: https://course-api.com/slides.html
