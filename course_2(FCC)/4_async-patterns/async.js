@@ -12,4 +12,8 @@ const getText = (path) => {
     })
 }
 
-getText('../3_builtInModules/content/first.txt').then(res => console.log(res)).catch(err => console.log(err))
+const start = async () => {
+    const first = await getText('../3_builtInModules/content/first.txt')
+    console.log(first);
+}
+start()

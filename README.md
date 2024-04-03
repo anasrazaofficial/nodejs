@@ -70,6 +70,8 @@ This module is used to get information about the path
 ### Event Loop
 - Js in single threaded because it runs the code line by line which is also called non-blocking
 - Event Loop is basically the same as settimeout which runs after when the code is executed for avoiding time issues.
+- `util.promisify(fs.writeFile)` is use to write a promise we don't have to setup the complete structure of the promise
+
 - The part of the code that runs in the end asynchronously is called the offloaded code
 #### Examples:
 1. readfile
@@ -78,3 +80,10 @@ This module is used to get information about the path
 and more...
 
 >Course api: https://course-api.com/slides.html
+
+
+### Events Emitter
+- on: Listens for an event
+- emit: Emits an event
+- We can add multiple listeners as we want
+- We need to maintain the order.i.e. first on then emit
