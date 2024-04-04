@@ -12,4 +12,4 @@ const getText = (path) => {
     })
 }
 
-getText('../3_builtInModules/content/first.txt').then(res => console.log(res)).catch(err => console.log(err))
+getText('../content/first.txt').then(res => console.log(res)).catch(err => console.log(err))

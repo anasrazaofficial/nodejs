@@ -13,7 +13,7 @@ const getText = (path) => {
 }
 
 const start = async () => {
-    const first = await getText('../3_builtInModules/content/first.txt')
+    const first = await getText('../content/first.txt')
     console.log(first);
 }
 start()
