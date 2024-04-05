@@ -87,3 +87,8 @@ and more...
 - emit: Emits an event
 - We can add multiple listeners as we want
 - We need to maintain the order.i.e. first on then emit
+
+
+### Streams
+- `createReadStream(path, options)` is use to get data in chunks
+- `pipe()` is use to send data in chunks as response
