@@ -92,3 +92,7 @@ and more...
 ### Streams
 - `createReadStream(path, options)` is use to get data in chunks
 - `pipe()` is use to send data in chunks as response
+
+
+### Servers
+- `writeHead(status code(200),type)` is use to provide headers
