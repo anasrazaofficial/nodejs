@@ -1,8 +1,8 @@
 const http = require('http');
 const fs = require('fs');
 
-const homepage = fs.readFileSync('./index.html')
-const homeCss = fs.readFileSync('./style.css')
+const homepage = fs.readFileSync('../public/index.html')
+const homeCss = fs.readFileSync('../public/style.css')
 
 const server = http.createServer((req, res) => {
     // res.writeHead(200, { 'content-type': 'text/plain' })

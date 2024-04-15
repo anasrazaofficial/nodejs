@@ -96,3 +96,9 @@ and more...
 
 ### Servers
 - `writeHead(status code(200),type)` is use to provide headers
+
+### Express
+- `get(routes)` = Use to create routes
+- `all('*')` = Use to give output to all routes
+- `res.status(code)` = Use to provide status code after response
+- `app.use(function)` = Use to build middlewares
