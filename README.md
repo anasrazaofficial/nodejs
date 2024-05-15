@@ -122,3 +122,10 @@ and more...
 ### Query params
 
 - We must use return keyword after sending the response
+
+### Middlewares
+
+- Middlewares must be written after imports and before methods
+- We can pass the second argument as a function in the method for express app which passes as a middleware
+- Middleware function gets 3 parameters `req`, `res`, and `next`, if we don't call `next()` or don't send the response.i.e. `res.send()` then the window keeps reloading
+- `app.use(basepath = optional, function)` is a middleware which is use to run a function in all the methods and basepath is use if we want to call the function in only those methods which are started with the given path
