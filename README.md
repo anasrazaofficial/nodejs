@@ -130,3 +130,18 @@ and more...
 - Middleware function gets 3 parameters `req`, `res`, and `next`, if we don't call `next()` or don't send the response.i.e. `res.send()` then the window keeps reloading
 - `app.use(basepath = optional, function)` is a middleware which is use to run a function in all the methods and basepath is use if we want to call the function in only those methods which are started with the given path
 - To use multiple middlewares we use in array.i.e. `app.use([middleware1, middleware2,...)]`
+
+## Course 3 (Udemy - Pro JavaScript Backend Development)
+
+### Steps to make a cluster on Mongodb Atlas
+
+1. Go to clusters section
+2. Click on create cluster
+3. Select provider and region
+4. Click on create cluster
+5. In cluster, click on connect
+6. Provide username and password
+7. Click on create user and then click on `choose a conncetion method`
+8. Select `connect to your application` -> `drivers`, if you want to make it for your application
+9. Now copy the `connection string` and replace `<password>` with your actual password of database
+10. Click on `done` button
