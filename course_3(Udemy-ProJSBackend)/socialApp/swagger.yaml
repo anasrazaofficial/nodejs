@@ -3,11 +3,13 @@ info:
   title: Social App
   description: Our first social app supporting LinkedIn, Instagram and Facebook accounts details
   version: 1.0.0
+
 servers:
 - url: http://localhost:5000/api/v1
   description: Localhost version of our social app
 - url: https://localhost:5000/api/v1
   description: This is just a dummy url, it doesn't work
+
 components:
   securitySchemes:
     BasicAuth:
@@ -16,3 +18,24 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
+
+paths:
+  /instagram:
+    get:
+      summary: returns username, followers and follows
+      responses:
+        '200': # status code
+          description: returns an object
+          content: # The response
+            application/json: # It'll return json object
+              schema: # Response
+                type: object # The type of schema will be an object
+                properties: # The data that response object will contain
+                  username:
+                    type: string
+                  followers:
+                    type: number
+                  followings:
+                    type: number
+                  date:
+                    type: string
