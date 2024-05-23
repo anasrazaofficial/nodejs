@@ -153,3 +153,14 @@ and more...
 3. Copy the `connection string`
 4. Go to compass and paste the `connection string` in the URI
 5. Change the `<password>` with your actual password and click on `connect`
+
+## Swagger
+
+- Swagger is use to write documentation for APIs
+- Important [link](https://swagger.io/docs/specification/basic-structure/) to the documentation
+
+## Nodemon
+
+Nodemon works on specific files like `.js`, `.jsx`, etc. but if we want to update the list of extensions, we first need to create a file named `nodemon.json` and then add `{ "ext": ".js, .json, .yaml, .jsx" }` in the file
+
+>Demo: [Nodemon.json](/socialApp/nodemon.json)

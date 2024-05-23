@@ -1,9 +1,16 @@
 const express = require('express');
-const format = require('date-format')
+const format = require('date-format');
+const swaggerUi = require('swagger-ui-express');
+const fs = require("fs");
+const YAML = require('yaml');
 
 const app = express();
-
 const PORT = 5000 || process.env.PORT;
+
+const file = fs.readFileSync('./swagger.yaml', 'utf8')
+const swaggerDocument = YAML.parse(file);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/", (req, res) => {
     res.status(200).send("<h1>Hello, world!</h1>");
