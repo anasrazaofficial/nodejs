@@ -47,7 +47,7 @@ app.get("/api/v1/linkedin", (req, res) => {
 })
 
 app.get("/api/v1/:sites", (req, res) => {
-    res.status(200).send(req.params.sites)
+    res.status(200).send({ params: req.params.sites })
 })
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
