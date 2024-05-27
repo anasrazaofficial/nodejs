@@ -1,0 +1,21 @@
+openapi: 3.0.0
+info:
+  title: Learn express and swagger
+  description: A course of writing documentation
+  version: 1.1.0
+  contact:
+    email: sanasraza1234@gmail.com
+    url: https:discoveranas.vercel.app
+
+servers:
+  - url: "{protocol}://localhost:5000/api/{version}"
+    description: For Localhost
+    variables: # Variables or slugs that can be provided in the url
+      version:
+        enum:
+          - v1
+          - v2
+      protocol:
+        enum:
+          - http
+          - https
