@@ -10,18 +10,18 @@ const swaggerDocument = YAML.parse(file);
 
 const courses = [
     {
-        id: "LP72ZW4H07848281910542336",
+        id: 1,
         name: "Learn React",
         price: 267
     },
     {
-        id: "RM89GHYZ2802224208019456",
-        name: "Learn React",
+        id: 2,
+        name: "Learn NextJs",
         price: 852
     },
     {
-        id: "XS89KMC70003689201398710272",
-        name: "Learn React",
+        id: 3,
+        name: "Learn NodeJS",
         price: 802
     },
 ]
@@ -42,6 +42,11 @@ app.get("/api/v1/object", (req, res) => {
 
 app.get("/api/v1/courses", (req, res) => {
     res.status(200).json(courses)
+})
+
+app.get("/api/v1/courses/:courseId", (req, res) => {
+    const courseById = courses.find(course => course.id === Number(req.params.courseId))
+    res.status(200).json(courseById)
 })
 
 app.listen(5000, () => console.log("Server listening on port 5000..."))

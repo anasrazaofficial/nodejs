@@ -65,8 +65,8 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: string
-                    example: "LY7YJ4LKJ36BL26"
+                    type: number
+                    example: 1
                   name:
                     type: string
                     example: Course name
@@ -90,18 +90,52 @@ paths:
             application/json:
               schema:
                 type: array
-                items:
+                items: # Refers to elements of the array
                   type: object
                   properties:
                     id:
-                      type: string
-                      example: "LY7YJ4LKJ36BL26"
+                      type: number
+                      example: 1
                     name:
                       type: string
                       example: Course name
                     price:
                       type: number
                       example: 123
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+
+  /courses/{courseId}:
+    get:
+      tags:
+        - Object
+      summary: Returns the course based on the given id
+      parameters:
+       - name: courseId
+         in: path
+         required: true
+         default: 1
+         schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 1
+                  name:
+                    type: string
+                    example: Course name
+                  price:
+                    type: number
+                    example: 123
         400:
           description: Bad request
         500:
