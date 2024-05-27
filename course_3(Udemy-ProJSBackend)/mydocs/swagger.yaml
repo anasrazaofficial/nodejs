@@ -19,3 +19,13 @@ servers:
         enum:
           - http
           - https
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+    BearerToken:
+      type: http
+      scheme: bearer
