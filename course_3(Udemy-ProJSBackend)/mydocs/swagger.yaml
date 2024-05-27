@@ -15,10 +15,12 @@ servers:
         enum:
           - v1
           - v2
+        default: v1
       protocol:
         enum:
           - http
           - https
+        default: http
 
 components:
   securitySchemes:
@@ -29,3 +31,78 @@ components:
     BearerToken:
       type: http
       scheme: bearer
+
+paths:
+  /hello:
+    get:
+      tags: # Group name
+        - String
+      summary: Returns a greet message
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Hello world"
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+
+  /object:
+    get:
+      tags:
+        - Object
+      summary: Returns an object of course
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "LY7YJ4LKJ36BL26"
+                  name:
+                    type: string
+                    example: Course name
+                  price:
+                    type: number
+                    example: 123
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+
+  /courses:
+    get:
+      tags:
+        - Array
+      summary: Returns all courses
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "LY7YJ4LKJ36BL26"
+                    name:
+                      type: string
+                      example: Course name
+                    price:
+                      type: number
+                      example: 123
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
