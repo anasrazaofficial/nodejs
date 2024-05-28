@@ -27,6 +27,7 @@ const courses = [
 ]
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(express.json()) // This line tells that the data in in JSON format
 
 app.get("/", (req, res) => {
     res.status(200).send("Hello, world!");
@@ -47,6 +48,12 @@ app.get("/api/v1/courses", (req, res) => {
 app.get("/api/v1/courses/:courseId", (req, res) => {
     const courseById = courses.find(course => course.id === Number(req.params.courseId))
     res.status(200).json(courseById)
+})
+
+app.post("/api/v1/addCourse", (req, res) => {
+    console.log(req.body);
+    courses.push(req.body)
+    res.status(200).send(true)
 })
 
 app.listen(5000, () => console.log("Server listening on port 5000..."))

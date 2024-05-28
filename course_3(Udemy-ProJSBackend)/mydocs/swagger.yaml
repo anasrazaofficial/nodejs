@@ -113,12 +113,12 @@ paths:
         - Object
       summary: Returns the course based on the given id
       parameters:
-       - name: courseId
-         in: path
-         required: true
-         default: 1
-         schema:
-          type: string
+        - name: courseId
+          in: path
+          required: true
+          default: 1
+          schema:
+            type: string
       responses:
         200:
           description: Success
@@ -136,6 +136,43 @@ paths:
                   price:
                     type: number
                     example: 123
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+
+  /addCourse:
+    post:
+      tags:
+        - Object
+      summary: Adds a new course to existing courses
+      consumes: # It means the data that it takes
+        - application/json
+      produces: # It means the data that it gives
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  example: 1
+                name:
+                  type: string
+                  example: Course name
+                price:
+                  type: number
+                  example: 123
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
         400:
           description: Bad request
         500:
