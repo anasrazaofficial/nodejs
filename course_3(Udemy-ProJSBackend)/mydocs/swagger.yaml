@@ -177,3 +177,67 @@ paths:
           description: Bad request
         500:
           description: Internal server error
+
+  /courseQuery:
+    get:
+      tags:
+        - Object
+      summary: Trying to learn about query
+      parameters:
+        - name: location
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [Karachi, Lahore, Islamabad]
+        - name: device
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [Web, Mobile]
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  - location:
+                      type: string
+                  - device:
+                      type: string
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+
+  /upload:
+    post:
+      tags:
+        - Image
+      summary: Uploading image
+      parameters:
+        - in: headers
+          name: auth
+      requestBody:
+        content:
+          multipart/form-data: # a media type
+            schema:
+              type: object # It is object because the decoded media has a lot of content
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
