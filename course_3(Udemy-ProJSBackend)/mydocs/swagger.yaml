@@ -219,7 +219,7 @@ paths:
         - Image
       summary: Uploading image
       parameters:
-        - in: headers
+        - in: header
           name: auth
       requestBody:
         content:

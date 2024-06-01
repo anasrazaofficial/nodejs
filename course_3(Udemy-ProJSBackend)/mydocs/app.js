@@ -72,7 +72,6 @@ app.post("/api/v1/upload", (req, res) => {
     const file = req.files.file
     const path = __dirname + "/images/" + Date.now() + ".jpg"
     file.mv(path, (err) => res.send(true))
-    res.status(true)
 })
 
 app.listen(5000, () => console.log("Server listening on port 5000..."))
