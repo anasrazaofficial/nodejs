@@ -54,4 +54,31 @@ app.post('/addUser', async (req, res) => {
     }
 })
 
+app.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body
+        if (!(email && password)) {
+            res.status(400).send("Field is missing or Fields are missing")
+        }
+
+        const user = await User.findOne({ email })
+        if (user && bcrypt.compare(email, user.email)) {
+            const token = jwt.sign(
+                { user_id: user.id, email },
+                SECRET_KEY,
+                { expiresIn: "2h" }
+            )
+            user.token = token
+            user.password = undefined
+
+            res.status(200).json(user)
+        }
+
+        res.status(400).send("Invalid credentials")
+
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 module.exports = app
