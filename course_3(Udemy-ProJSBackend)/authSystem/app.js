@@ -71,10 +71,10 @@ app.post('/login', async (req, res) => {
             user.token = token
             user.password = undefined
 
-            res.status(200).json(user)
+            return res.status(200).json(user)
         }
 
-        res.status(400).send("Invalid credentials")
+        return res.status(400).send("Invalid credentials")
 
     } catch (error) {
         console.log(error);
