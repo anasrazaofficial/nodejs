@@ -192,11 +192,30 @@ We can pass enum values in 2 ways:
 
 >Demo: Click [here](/mydocs/swagger.yaml) to go to the documentation
 
-### `express-fileupload` Package
+### NPM Packages
+
+#### express-fileupload
 
 This package is use to send and get files(like images) in request and response
 
 - `file.mv(path, errorHandler)` = This method is use to move file to the desired path.
+
+#### bcryptjs
+
+This package is use for encryptions
+
+- `bcryptjs.hash(value, n=10)` = This is method that encrypts the value. There is an algorithm that converts the value into encrypted form, where `n` is the number of turns that this algorithm should run. More the turns more complex encryption.
+
+#### jsonwebtoken
+
+This package is use for generating tokens. A token is an important and secret part of key to your data. It is secure. It contains values of your payload. It should be kept private as password.
+
+- `jwt.sign(payload, secret_key, options)` = This function is use to generate a token. It takes 3 parameters:
+  - payload: Object of your request body. It can contain 1 - all fields.
+  - secret_key: A key which can be anything.
+  - options: There're 2 options:
+    - Token expires in
+    - Algorithm process: Default is `HS256` which is highly safe and secure.
 
 ### ORM vs ODM
 
@@ -211,6 +230,7 @@ We use `Mongoose` for ODM
 - `process.exit(0 / 1)`: This function accepts single parameter (0 or 1).
   - 0 means end the process without any kind of failure.
   - 1 means end the process with some failure.
+- Sometimes database operations take time so making them asynchronous is a better approach.
 
 ### Some extra points
 
