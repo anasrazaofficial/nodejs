@@ -216,6 +216,7 @@ This package is use for generating tokens. A token is an important and secret pa
   - options: There're 2 options:
     - Token expires in
     - Algorithm process: Default is `HS256` which is highly safe and secure.
+- `jwt.verify(token, secret_key)` = This method verifies the token if it's valid or not. The validation method returns a decode object that we stored the token in.
 
 ### ORM vs ODM
 
@@ -231,6 +232,20 @@ We use `Mongoose` for ODM
   - 0 means end the process without any kind of failure.
   - 1 means end the process with some failure.
 - Sometimes database operations take time so making them asynchronous is a better approach.
+
+### Token in postman
+
+To send token in the headers of a postman, you need to follow these steps:
+
+1. Go to `Headers` section
+2. Enter `Authorization` as the key
+3. Enter `Bearer token` as the value (without single or double quotes)
+
+We can also send the token through Authorization section:
+
+1. Go to `Authorization` section
+2. Select `Bearer Token` as Auth Type
+3. Pass the token in the `Token` field (without single or double quotes)
 
 ### Some extra points
 

@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const User = require('./model/user')
+const auth = require('./middleware/auth')
 const { SECRET_KEY } = process.env
 
 const app = express();
@@ -79,6 +80,10 @@ app.post('/login', async (req, res) => {
     } catch (error) {
         console.log(error);
     }
+})
+
+app.get('/dashboard', auth, (req, res) => {
+    res.status(200).send("Welcome to the Dashboard!")
 })
 
 module.exports = app
