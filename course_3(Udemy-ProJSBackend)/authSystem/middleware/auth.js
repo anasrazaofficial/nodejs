@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const { SECRET_KEY } = process.env
 
 const auth = (req, res, next) => {
-    const token = req.header('Authorization').replace("Bearer ", "")
+    // console.log(req.cookies);
+    const token = req.header('Authorization')?.replace("Bearer ", "")
         || req.cookies.token
         || req.body.token;
 
@@ -12,7 +13,7 @@ const auth = (req, res, next) => {
 
     try {
         const decode = jwt.verify(token, SECRET_KEY)
-        console.log(decode);
+        // console.log(decode);
 
         req.user = decode // After authentication we can get the user by using the datebase
 

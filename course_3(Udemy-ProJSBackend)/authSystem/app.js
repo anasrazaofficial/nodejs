@@ -4,6 +4,7 @@ require('./config/database').connect()
 const express = require('express')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
 
 const User = require('./model/user')
 const auth = require('./middleware/auth')
@@ -12,6 +13,7 @@ const { SECRET_KEY } = process.env
 const app = express();
 
 app.use(express.json())
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
     res.status(200).send("Welcome!")
@@ -72,7 +74,14 @@ app.post('/login', async (req, res) => {
             user.token = token
             user.password = undefined
 
-            return res.status(200).json(user)
+            return res.status(200).cookie("token", token, {    //res...cookie(Cookie Name, Cookie Value, Options)
+                expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+                httpOnly: true // If true, then cookies can only be accessed by backend
+            }).json({
+                success: true,
+                token,
+                user
+            })
         }
 
         return res.status(400).send("Invalid credentials")
