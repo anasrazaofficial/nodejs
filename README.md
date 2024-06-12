@@ -158,10 +158,16 @@ Learn backend development with javascript. Learn swagger, express, authenticatio
 
 ### Middlewares
 
-- `app.use(express.json())` = It parses incoming JSON data from HTTP requests
-- `app.use(fileUpload())` = If file upload comes up, it adds file object in request object. Like, `req.file`
+- `app.use(express.json())` = It parses incoming JSON data from HTTP requests.
+- `app.use(fileUpload())` = If file upload comes up, it adds file object in request object. Like, `req.file`.
 
->Demo: Click [here](./mydocs/app.js) to go to the code
+>Code: [express.json and fileUpload](./mydocs/app.js)
+
+- `app.use(express.urlencoded({ extended:true }))` = If the form is passed in query then we need to encode the url which is done by this middleware. `{ extended:true }` is optional if we provide this then it'll work for the object having children and grandchildren objects in it, like,\
+`{"name":{"first":"Anas","last":"Raza"}}`
+- `app.set("view engine", "ejs")` = This is use for rendering web pages. The term 'View engine' allow us to render web pages using template files and 'ejs' is the type of view engine.
+
+>Code: [View engine and urlencoded](./ejsAndCloudinary/app.js)
 
 ### Swagger
 
@@ -200,12 +206,16 @@ This package is use to send and get files(like images) in request and response
 
 - `file.mv(path, errorHandler)` = This method is use to move file to the desired path.
 
+>Code: [Here](./mydocs/app.js)
+
 #### bcryptjs
 
 This package is use for encryptions
 
 - `bcryptjs.hash(value, n=10)` = This is method that encrypts the value. There is an algorithm that converts the value into encrypted form, where `n` is the number of turns that this algorithm should run. More the turns more complex encryption.
 
+>Code: [Here](./authSystem/app.js)
+>
 #### jsonwebtoken
 
 This package is use for generating tokens. A token is an important and secret part of key to your data. It is secure. It contains values of your payload. It should be kept private as password.
@@ -217,6 +227,8 @@ This package is use for generating tokens. A token is an important and secret pa
     - Token expires in
     - Algorithm process: Default is `HS256` which is highly safe and secure.
 - `jwt.verify(token, secret_key)` = This method verifies the token if it's valid or not. The validation method returns a decode object that we stored the token in.
+
+>Code: [Here](./authSystem/app.js)
 
 ### ORM vs ODM
 
@@ -246,6 +258,11 @@ We can also send the token through Authorization section:
 1. Go to `Authorization` section
 2. Select `Bearer Token` as Auth Type
 3. Pass the token in the `Token` field (without single or double quotes)
+
+### View Engine / ejs
+
+'View engine' allows us to render web pages using template files and 'ejs' is the type of view engine. For view engines, the structure is that we need to make a folder named `views` and inside that folder there are HTML files with `.ejs` extension that needed to be rendered. In the main file there's a need of middleware,\
+`app.set("view engine", "ejs")`, where 'ejs' is the type of view engine
 
 ### Some extra points
 
