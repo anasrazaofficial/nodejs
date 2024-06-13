@@ -5,9 +5,9 @@ const cloudinary = require('cloudinary').v2
 const app = express()
 
 cloudinary.config({
-    cloud_name: "dlqjthwo5",
-    api_key: "841316358199787",
-    api_secret: "jD1L2Pd5IuVnCKDuSgPIYAJXbt4"
+    cloud_name: "Import from .env in current folder",
+    api_key: "Import from .env in current folder",
+    api_secret: "Import from .env in current folder"
 })
 
 app.set('view engine', 'ejs')
