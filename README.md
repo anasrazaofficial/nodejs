@@ -158,16 +158,21 @@ Learn backend development with javascript. Learn swagger, express, authenticatio
 
 ### Middlewares
 
-- `app.use(express.json())` = It parses incoming JSON data from HTTP requests.
-- `app.use(fileUpload())` = If file upload comes up, it adds file object in request object. Like, `req.file`.
+1. `app.use(express.json())` = It parses incoming JSON data from HTTP requests.
+    >Code: [express.json](./course_3(Udemy-ProJSBackend)/mydocs/app.js)
 
->Code: [express.json and fileUpload](./mydocs/app.js)
+2. `app.use(fileUpload())` = If file upload comes up, it adds file object in request object. Like, `req.file`. Sometimes it's called with a params, like\
+`app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }))`:
+    - `useTempFiles` is true if you want to store image in a temporary directory.
+    - `tempFileDir` is the path to the temporary directory.
+  We can make it default by passing nothing in the parameters. But the actual difference is that default uses memory instead of the disk space which will make the system, but it's quicker to access. In short, passing these parameters is generally suitable for larger applications.
 
-- `app.use(express.urlencoded({ extended:true }))` = If the form is passed in query then we need to encode the url which is done by this middleware. `{ extended:true }` is optional if we provide this then it'll work for the object having children and grandchildren objects in it, like,\
+3. `app.use(express.urlencoded({ extended:true }))` = If the form is passed in query then we need to encode the url which is done by this middleware. `{ extended:true }` is optional if we provide this then it'll work for the object having children and grandchildren objects in it, like,\
 `{"name":{"first":"Anas","last":"Raza"}}`
-- `app.set("view engine", "ejs")` = This is use for rendering web pages. The term 'View engine' allow us to render web pages using template files and 'ejs' is the type of view engine.
 
->Code: [View engine and urlencoded](./ejsAndCloudinary/app.js)
+4. `app.set("view engine", "ejs")` = This is use for rendering web pages. The term 'View engine' allow us to render web pages using template files and 'ejs' is the type of view engine.
+
+>Code: [fileUpload, View engine and urlencoded](./course_3(Udemy-ProJSBackend)/ejsAndCloudinary/app.js)
 
 ### Swagger
 
@@ -178,7 +183,7 @@ Learn backend development with javascript. Learn swagger, express, authenticatio
 
 Nodemon works on specific files like `.js`, `.jsx`, etc. but if we want to update the list of extensions, we first need to create a file named `nodemon.json` and then add `{ "ext": ".js, .json, .yaml, .jsx" }` in the file
 
->Demo: Click [here](/socialApp/nodemon.json) to go to the code
+>Demo: Click [here](./course_3(Udemy-ProJSBackend)/socialApp/nodemon.json) to go to the code
 
 ### Enum
 
@@ -196,17 +201,17 @@ We can pass enum values in 2 ways:
 2. enum: [enum1, enum2, enum3, ...]
 ```
 
->Demo: Click [here](/mydocs/swagger.yaml) to go to the documentation
+>Demo: Click [here](./course_3(Udemy-ProJSBackend)/mydocs/swagger.yaml) to go to the documentation
 
 ### NPM Packages
 
 #### express-fileupload
 
-This package is use to send and get files(like images) in request and response
+This package is use to send and get files(like images) in request and response. After passing this as a middleware, there is a field added to the request object, `req.files`.
 
 - `file.mv(path, errorHandler)` = This method is use to move file to the desired path.
 
->Code: [Here](./mydocs/app.js)
+>Code: [Here](./course_3(Udemy-ProJSBackend)/mydocs/app.js)
 
 #### bcryptjs
 
@@ -214,7 +219,7 @@ This package is use for encryptions
 
 - `bcryptjs.hash(value, n=10)` = This is method that encrypts the value. There is an algorithm that converts the value into encrypted form, where `n` is the number of turns that this algorithm should run. More the turns more complex encryption.
 
->Code: [Here](./authSystem/app.js)
+>Code: [Here](./course_3(Udemy-ProJSBackend)/authSystem/app.js)
 >
 #### jsonwebtoken
 
@@ -228,7 +233,7 @@ This package is use for generating tokens. A token is an important and secret pa
     - Algorithm process: Default is `HS256` which is highly safe and secure.
 - `jwt.verify(token, secret_key)` = This method verifies the token if it's valid or not. The validation method returns a decode object that we stored the token in.
 
->Code: [Here](./authSystem/app.js)
+>Code: [Here](./course_3(Udemy-ProJSBackend)/authSystem/app.js)
 
 ### ORM vs ODM
 
@@ -273,3 +278,5 @@ We can also send the token through Authorization section:
 const express = require('express'); // This line is holding a module in a variable
 require('file').function(); // This line is running `function` from `file`
 ```
+
+- `enctype="multipart/form-data"` = This is added in the (HTML / frontend) as an attribute of the  form for handling images and files.
