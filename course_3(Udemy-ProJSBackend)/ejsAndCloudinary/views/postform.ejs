@@ -9,6 +9,8 @@
 
 <body>
     <h1>Post Form</h1>
+
+    <!-- enctype="multipart/form-data" is use for images / assets / files -->
     <form method="post" action="/post" enctype="multipart/form-data">
         <div>
             <label for="firstName">First Name</label>
@@ -20,7 +22,7 @@
         </div>
         <div>
             <label for="sampleFile">File</label>
-            <input type="file" name="sampleFile" id="sampleFile">
+            <input type="file" name="sampleFile" multiple id="sampleFile">
         </div>
         <button type="submit">Submit</button>
     </form>
