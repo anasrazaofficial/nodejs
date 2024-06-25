@@ -218,6 +218,7 @@ This package is use to send and get files(like images) in request and response. 
 This package is use for encryptions
 
 - `bcryptjs.hash(value, n=10)` = This is method that encrypts the value. There is an algorithm that converts the value into encrypted form, where `n` is the number of turns that this algorithm should run. More the turns more complex encryption.
+- `bcryptjs.compare(Entered password, password from database)` = This method compares the password against the password stored in the database.
 
 >Code: [Here](./course_3(Udemy-ProJSBackend)/authSystem/app.js)
 >
@@ -280,3 +281,4 @@ require('file').function(); // This line is running `function` from `file`
 ```
 
 - `enctype="multipart/form-data"` = This is added in the (HTML / frontend) as an attribute of the  form for handling images and files.
+- `res.cookie(Cookie Name, Cookie Value, Options)` = Options can be expired date and httpOnly (if true, then only be accessed by backend)
