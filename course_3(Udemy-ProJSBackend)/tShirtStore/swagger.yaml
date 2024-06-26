@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: TShirt ECommerce App
+  description: A course of making an ecommerce application
+  version: 1.1.0
+  contact:
+    email: sanasraza1234@gmail.com
+    url: https:discoveranas.vercel.app
+
+servers:
+  - url: "{protocol}://localhost:5000/api/{version}"
+    description: For Localhost
+    variables: # Variables or slugs that can be provided in the url
+      version:
+        enum:
+          - v1
+          - v2
+        default: v1
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+    BearerToken:
+      type: http
+      scheme: bearer
+
+paths:
+  /dummy:
+    get:
+      tags:
+        - Home
+      summary: Returns a message
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Hello world"
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
