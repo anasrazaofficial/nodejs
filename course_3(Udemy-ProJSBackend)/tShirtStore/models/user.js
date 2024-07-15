@@ -30,16 +30,14 @@ const userSchema = new Schema({
     photo: {
         id: {
             type: String,
-            required: true
+            required: [true, "Please provide photo id"]
+
         },
         secure_url: {
             type: String,
-            required: true
-        },
-    },
-    role: {
-        type: String,
-        default: 'user',
+            required: [true, "Please provide photo secure url"]
+
+        }
     },
     forgotPassword: {
         token: String,
