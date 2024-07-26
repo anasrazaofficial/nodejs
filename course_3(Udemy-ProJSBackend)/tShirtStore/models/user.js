@@ -7,7 +7,7 @@ const crypto = require('crypto')
 const { JWT_SECRET_KEY, JWT_EXPIRY } = process.env
 
 const userSchema = new Schema({
-    name: {
+    username: {
         type: String,
         required: [true, "Please provide a name"],
     },

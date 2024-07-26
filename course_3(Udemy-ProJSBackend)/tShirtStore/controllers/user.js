@@ -6,23 +6,20 @@ const CustomError = require('../utils/customError')
 const cookieToken = require('../utils/cookieTokenResponse')
 
 const signup = promise(async (req, res, next) => {
-    let result;
-    if (req.files) {
-        let file = req.files.photo
-        result = await cloudinary.v2.uploader.upload(file, {
-            folder: "tshirt-store",
-            width: 150,
-            crop: "scale"
-        })
-    }
-
-    const { name, email, password } = req.body
+    const { username, email, password } = req.body
     if (!email) {
         return next(new CustomError("Please provide email", 400))
     }
 
+    if (!req.files) {
+        return next(new CustomError("Please provide photo", 400))
+    }
+
+    let file = req.files.photo
+    let result = await cloudinary.v2.uploader.upload(file.tempFilePath, { folder: "tshirt-store" })
+
     const user = await User.create({
-        name,
+        username,
         email,
         password,
         photo: {

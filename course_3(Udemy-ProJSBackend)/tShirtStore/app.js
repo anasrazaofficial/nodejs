@@ -24,5 +24,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api/v1', user)
 
+app.set("view engine", "ejs")
+
+app.get('/signup', (req, res) => res.render('signup'))
+
 // Exporting app
 module.exports = app

@@ -343,7 +343,7 @@ module.exports = router
 
 This folder contains any functions and logics that can be needed in controllers
 
-## Cloudinary
+### Cloudinary
 
 You need `account name`, `api key`, and `api secret`. Then import cloudinary and then do this:
 
