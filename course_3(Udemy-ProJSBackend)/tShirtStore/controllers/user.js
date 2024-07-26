@@ -30,4 +30,38 @@ const signup = promise(async (req, res, next) => {
     cookieToken(user, res)
 })
 
-module.exports = { signup } 
+const login = promise(async (req, res, next) => {
+    const { username, password } = req.body
+    if (!username && !password) {
+        return next(new CustomError("Please provide username and password", 400))
+    }
+
+    const user = await User.findOne({ username }).select("+password")
+
+    if (!user) {
+        return next(new CustomError("You're not registered", 404))
+    }
+
+    const isPasswordCorrect = await user.comparePassword(password)
+
+    if (!isPasswordCorrect) {
+        return next(new CustomError("Wrong password", 400))
+    }
+
+    cookieToken(user, res)
+})
+
+const logout = promise(async (req, res, next) => {
+    res.cookie(
+        "token", null,
+        {
+            expires: new Date(Date.now()),
+            httpOnly: true
+        }
+    ).status(200).json({
+        success: true,
+        message: "Logged out successfully"
+    })
+})
+
+module.exports = { signup, login, logout } 
