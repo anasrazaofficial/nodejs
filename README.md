@@ -282,6 +282,7 @@ We use `Mongoose` for ODM
   - remove: Runs before a document is removed.
   - find: Runs before a find query is executed.
   - update: Runs before an update query is executed.
+- `model.save({ validateBeforeSave: false })`: This method is used to save a document to the database. There's no need to pass any argument to this method. If `validateBeforeSave` is false, then it'll not check the validations of the model before saving.
 
 ### Token in postman
 
@@ -352,6 +353,21 @@ You need `account name`, `api key`, and `api secret`. Then import cloudinary and
 ```
 
 It should be connected in the file that runs like `app.js` or `index.js`.
+
+### Nodemailer.com
+
+It's a module for Node.js applications that allows email sending. Here's the [link](https://nodemailer.com/about/)
+
+### Mailtrap.io
+
+It's Email Delivery Platform that allows customers to manage the email infrastructure, for testing, sending,etc. We can put the code / credentials from mailtrap to nodemailer. Follow these steps:
+
+1. Go to [https://mailtrap.io/inboxes](https://mailtrap.io/inboxes)
+2. Select `My Inbox`
+3. Scroll down and select `Node.js`
+4. Copy and paste the code
+
+>Important: These credentials are not meant to be pushed to git or somewhere else, so make sure to put these credentials in `.env` file.
 
 ### Some extra points
 

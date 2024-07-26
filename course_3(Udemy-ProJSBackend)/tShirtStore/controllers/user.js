@@ -4,6 +4,7 @@ const User = require('../models/user')
 const promise = require('../middlewares/promise')
 const CustomError = require('../utils/customError')
 const cookieToken = require('../utils/cookieTokenResponse')
+const emailHelper = require('../utils/emailHelper')
 
 const signup = promise(async (req, res, next) => {
     const { username, email, password } = req.body
@@ -64,4 +65,45 @@ const logout = promise(async (req, res, next) => {
     })
 })
 
-module.exports = { signup, login, logout } 
+const forgotPassword = promise(async (req, res, next) => {
+    try {
+        const { email } = req.body
+        if (!email) {
+            return next(new CustomError("Please provide email", 400))
+        }
+
+        const user = await User.findOne({ email })
+        if (!user) {
+            return next(new CustomError("User not found at given email address", 404))
+        }
+
+        const forgotToken = await user.getResetPasswordToken()
+        await user.save({ validateBeforeSave: false })
+
+        const forgotPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${forgotToken}`
+        const message = `Open the link to change your password\n\n${forgotPasswordUrl}`
+
+        try {
+            await emailHelper({
+                to: email,
+                subject: "Password reset email",
+                text: message
+            })
+
+            return res.status(200).json({
+                success: true,
+                message: "Email sent successfully"
+            })
+        } catch (error) {
+            user.forgotPassword.token = undefined
+            user.forgotPassword.expiry = undefined
+            await user.save({ validateBeforeSave: false })
+
+            return next(new CustomError(error.message, error.code))
+        }
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+module.exports = { signup, login, logout, forgotPassword }
