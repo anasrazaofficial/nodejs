@@ -1,4 +1,5 @@
 const cloudinary = require('cloudinary')
+const crypto = require('crypto')
 
 const User = require('../models/user')
 const promise = require('../middlewares/promise')
@@ -80,7 +81,7 @@ const forgotPassword = promise(async (req, res, next) => {
         const forgotToken = await user.getResetPasswordToken()
         await user.save({ validateBeforeSave: false })
 
-        const forgotPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${forgotToken}`
+        const forgotPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${forgotToken}`
         const message = `Open the link to change your password\n\n${forgotPasswordUrl}`
 
         try {
@@ -106,4 +107,55 @@ const forgotPassword = promise(async (req, res, next) => {
     }
 })
 
-module.exports = { signup, login, logout, forgotPassword }
+const resetPassword = promise(async (req, res, next) => {
+    const token = req.params.token;
+    const encryptedToken = crypto.createHash("sha256").update(token).digest("hex");
+
+    const user = await User.findOne({
+        'forgotPassword.token': encryptedToken,
+        'forgotPassword.expiry': { $gt: Date.now() },
+    });
+
+    if (!user) {
+        return next(new CustomError("Token is invalid or expired", 400));
+    }
+
+    if (req.body.password !== req.body.confirmPassword) {
+        return next(new CustomError("Password and confirm password do not match", 400));
+    }
+
+    user.password = req.body.password;
+    user.forgotPassword = undefined;
+
+    await user.save();
+
+    cookieToken(user, res);
+});
+
+const getLoggedInUser = promise(async (req, res, next) => {
+    const user = req.user
+
+    return res.status(200).json({
+        success: true,
+        user
+    })
+});
+
+const changePassword = promise(async (req, res, next) => {
+    const userId = req.user.id
+    const user = await User.findById(userId).select("+password")
+    const arePasswordsSame = user.comparePassword(req.body.currentPassword)
+
+    if (!arePasswordsSame) {
+        return next(new CustomError("Incorrect password", 400))
+    }
+
+    user.password = req.body.newPassword
+
+    await user.save()
+
+    cookieToken(user, res)
+});
+
+
+module.exports = { signup, login, logout, forgotPassword, resetPassword, getLoggedInUser, changePassword }

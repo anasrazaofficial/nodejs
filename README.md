@@ -166,6 +166,8 @@ Learn backend development with javascript. Learn swagger, express, authenticatio
 
 3. `app.set("view engine", "ejs")` = This is use for rendering web pages. The term 'View engine' allow us to render web pages using template files and 'ejs' is the type of view engine.
 
+4. In routes, we can pass middleware in such a way, `route.get('/abc/def',middleware, controllerMethod)`
+
 >Code: [fileUpload, View engine and urlencoded](./ejsAndCloudinary/app.js)
 
 ### Swagger
