@@ -157,5 +157,33 @@ const changePassword = promise(async (req, res, next) => {
     cookieToken(user, res)
 });
 
+const updateUser = promise(async (req, res, next) => {
+    const newDate = {
+        username: req.body.username,
+        email: req.body.email
+    }
 
-module.exports = { signup, login, logout, forgotPassword, resetPassword, getLoggedInUser, changePassword }
+    if (req.files) {
+        const imageId = req.user.photo.id
+        await cloudinary.v2.uploader.destroy(imageId)
+        const result = await cloudinary.v2.uploader.upload(req.files.photo.tempFilePath, { folder: "users" })
+
+        newData.photo = {
+            id: result.public_id,
+            secure_url: result.secure_url
+        }
+    }
+
+    const user = await User.findByIdAndUpdate(req.user.id, newDate, {
+        new: true,
+        runValidators: true
+    });
+
+    return res.status(200).json({
+        success: true,
+        user
+    })
+});
+
+
+module.exports = { signup, login, logout, forgotPassword, resetPassword, getLoggedInUser, changePassword, updateUser }
