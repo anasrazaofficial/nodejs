@@ -18,3 +18,12 @@ exports.isLoggedIn = promise(async (req, res, next) => {
 
     next()
 })
+
+exports.isCustomRole = (role) => {
+    return (req, res, next) => {
+        if (role !== req.user.role) {
+            return next(new CustomError("You are not allowed for this resource", 403))
+        }
+        next()
+    }
+}

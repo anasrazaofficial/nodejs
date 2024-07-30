@@ -9,7 +9,7 @@ const { JWT_SECRET_KEY, JWT_EXPIRY } = process.env
 const userSchema = new Schema({
     username: {
         type: String,
-        required: [true, "Please provide a name"],
+        required: [true, "Please provide username"],
     },
     email: {
         type: String,
