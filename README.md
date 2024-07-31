@@ -371,6 +371,29 @@ It's Email Delivery Platform that allows customers to manage the email infrastru
 
 >Important: These credentials are not meant to be pushed to git or somewhere else, so make sure to put these credentials in `.env` file.
 
+### Query replacement using Regex
+
+```javascript
+const p = 'gte gte lte mygte gtetest'
+const regex = /\b(gte|lte|...)\b/g
+console.log(p.replace(regex, m => `$${m}`))
+
+--------------------------------------------
+
+Output: `$gte $gte $lte mygte gtetest`
+```
+
+The matching keys are:
+
+- `gte` = Greater than and equal to (>=)
+- `gt` = Greater than (>)
+- `lte` = Less than and equal to (<=)
+- `lt` = Less than (<)
+- `eq` = Equal to (==)
+- `ne` = Not equal to (!=)
+- `in` = Not In
+- `nin` = Not in
+
 ### Some extra points
 
 - `multipart/form-data` = A data type for media files

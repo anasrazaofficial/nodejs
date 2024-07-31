@@ -18,7 +18,7 @@ const signup = promise(async (req, res, next) => {
     }
 
     let file = req.files.photo
-    let result = await cloudinary.v2.uploader.upload(file.tempFilePath, { folder: "tshirt-store" })
+    let result = await cloudinary.v2.uploader.upload(file.tempFilePath, { folder: "tshirt-store/users" })
 
     const user = await User.create({
         username,
@@ -167,7 +167,7 @@ const updateUser = promise(async (req, res, next) => {
     if (req.files) {
         const imageId = req.user.photo.id
         await cloudinary.v2.uploader.destroy(imageId)
-        const result = await cloudinary.v2.uploader.upload(req.files.photo.tempFilePath, { folder: "users" })
+        const result = await cloudinary.v2.uploader.upload(req.files.photo.tempFilePath, { folder: "tshirt-store/users" })
 
         newData.photo = {
             id: result.public_id,
