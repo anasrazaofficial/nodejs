@@ -44,4 +44,26 @@ const getAllProducts = promise(async (req, res, next) => {
     })
 })
 
-module.exports = { addProduct, getAllProducts }
+const getProductById = promise(async (req, res, next) => {
+    const product = await Product.find(req.params.id)
+
+    if (!product) {
+        return next(new CustomError("Product not found on given id", 401))
+    }
+
+    return res.status(200).json({
+        success: true,
+        product
+    })
+})
+
+const getAllProductsByAdmin = promise(async (req, res, next) => {
+    const products = await Product.find()
+
+    return res.status(200).json({
+        success: true,
+        products
+    })
+})
+
+module.exports = { addProduct, getAllProducts, getProductById, getAllProductsByAdmin }
