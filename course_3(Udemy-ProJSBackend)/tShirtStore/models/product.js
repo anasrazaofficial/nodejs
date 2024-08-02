@@ -11,7 +11,7 @@ const productSchema = new Schema({
         required: [true, 'Please provide product price']
     },
     description: {
-        type: Number,
+        type: String,
         required: [true, 'Please provide product description']
     },
     photos: [{

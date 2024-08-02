@@ -7,6 +7,7 @@ const fs = require("fs");
 const YAML = require('yaml');
 
 const user = require('./routes/user')
+const product = require('./routes/product')
 
 const app = express()
 const file = fs.readFileSync('./swagger.yaml', 'utf8')
@@ -22,7 +23,8 @@ app.use(fileUpload({
 app.use(morgan("tiny"))
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use('/api/v1', user)
+app.use('/api/v1/user', user)
+app.use('/api/v1/product', product)
 
 app.set("view engine", "ejs")
 

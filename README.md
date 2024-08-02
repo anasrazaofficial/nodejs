@@ -373,6 +373,21 @@ It's Email Delivery Platform that allows customers to manage the email infrastru
 
 ### Query replacement using Regex
 
+Whenever you pass parameters in query like: `https://localhost:5000/product?search=coder&page=2&category=shortsleeves&rating[gte]=4&price[lte]=999&price[gte]=199`, it converts in an object like:
+
+```javascript
+req.query = {
+  search=coder,
+  page=2,
+  category=shortsleeves,
+  rating[gte]=4,
+  price[lte]=999,
+  price[gte]=199
+}
+```
+
+>Important URL - <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace>
+
 ```javascript
 const p = 'gte gte lte mygte gtetest'
 const regex = /\b(gte|lte|...)\b/g
@@ -393,6 +408,31 @@ The matching keys are:
 - `ne` = Not equal to (!=)
 - `in` = Not In
 - `nin` = Not in
+
+### Regex in MongoDB
+
+`$regex` operator in MongoDB is used to perform pattern matching using regular expressions in queries. This operator can be used in various scenarios to filter documents based on string patterns.
+
+#### Syntax
+
+```javascript
+1. model.find({ <field>: { $regex: /pattern/, $options: '<options>' } })
+2. model.find({ "<field>": { "$regex": "pattern", "$options": "<options>" } })
+3. model.find({ <field>: { $regex: /pattern/<options> } })
+```
+
+#### Example
+
+Imagine you have a collection of user documents with fields such as username, email, and phone. You might want to:
+
+- Search for users with usernames containing "john" (case-insensitive):\
+`db.users.find({ username: { $regex: "john", $options: "i" } });`
+
+- Find all users with email addresses from a specific domain (e.g., "@example.com"):\
+`db.users.find({ email: { $regex: "@example\\.com$" } });`
+
+- Validate that phone numbers follow a specific pattern (e.g., "123-456-7890"):\
+`db.users.find({ phone: { $regex: "^[0-9]{3}-[0-9]{3}-[0-9]{4}$" } });`
 
 ### Some extra points
 

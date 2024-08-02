@@ -12,8 +12,8 @@ router.post('/password/forgot', forgotPassword)
 router.post('/password/reset/:token', resetPassword)
 router.post('/password/update', isLoggedIn, changePassword)
 
-router.get('/user', isLoggedIn, getLoggedInUser)
-router.put('/user/update', isLoggedIn, updateUser)
+router.get('/', isLoggedIn, getLoggedInUser)
+router.put('/update', isLoggedIn, updateUser)
 
 router.get('/admin/users', isLoggedIn, isCustomRole('admin'), getAllUsersByAdmin)
 router.get('/admin/user/:id', isLoggedIn, isCustomRole('admin'), getOneUserByAdmin)
