@@ -24,7 +24,7 @@ app.use(morgan("tiny"))
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api/v1/user', user)
-app.use('/api/v1/product', product)
+app.use('/api/v1', product)
 
 app.set("view engine", "ejs")
 
