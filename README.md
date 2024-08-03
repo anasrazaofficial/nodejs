@@ -285,6 +285,7 @@ We use `Mongoose` for ODM
   - find: Runs before a find query is executed.
   - update: Runs before an update query is executed.
 - `model.save({ validateBeforeSave: false })`: This method is used to save a document to the database. There's no need to pass any argument to this method. If `validateBeforeSave` is false, then it'll not check the validations of the model before saving.
+- `populate('key', 'field1 field2 ...')`: This method is used to go deeper into the key (which is already a model) of a model, and gives the fields of submodel, For example: `Order.find().populate('user', 'username email ...')`
 
 ### Token in postman
 

@@ -9,6 +9,7 @@ const YAML = require('yaml');
 const user = require('./routes/user')
 const product = require('./routes/product')
 const payment = require('./routes/payment')
+const order = require('./routes/order')
 
 const app = express()
 const file = fs.readFileSync('./swagger.yaml', 'utf8')
@@ -27,6 +28,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1/user', user)
 app.use('/api/v1', product)
 app.use('/api/v1/pay', payment)
+app.use('/api/v1', order)
 
 app.set("view engine", "ejs")
 

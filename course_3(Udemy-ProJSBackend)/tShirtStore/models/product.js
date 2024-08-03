@@ -36,10 +36,10 @@ const productSchema = new Schema({
         type: String,
         required: [true, 'Please provide product brand']
     },
-    // stock: {
-    //     type: String,
-    //     required: [true, 'Please provide product price']
-    // },
+    stock: {
+        type: Number,
+        required: [true, 'Please add a number in stock']
+    },
     ratings: {
         type: Number,
         default: 0
