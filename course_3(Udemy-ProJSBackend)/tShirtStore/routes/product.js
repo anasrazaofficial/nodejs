@@ -1,6 +1,6 @@
 const express = require('express')
 const { isLoggedIn, isCustomRole } = require('../middlewares/user')
-const { addProductByAdmin, getAllProducts, getProductById, getAllProductsByAdmin, updateProductByAdmin, deleteProductByAdmin } = require('../controllers/product')
+const { addProductByAdmin, getAllProducts, getProductById, getAllProductsByAdmin, updateProductByAdmin, deleteProductByAdmin, addReview, deleteReview } = require('../controllers/product')
 const router = express.Router()
 
 router.post('/admin/product/add', isLoggedIn, isCustomRole("admin"), addProductByAdmin)
@@ -10,5 +10,9 @@ router.delete('/admin/product/delete/:id', isLoggedIn, isCustomRole("admin"), de
 
 router.get('/product/get', getAllProducts)
 router.get('/product/get/:id', getProductById)
+
+// These both are (adding and updating) and deleting the review in the product, that's why we're calling the put method, because the product is updating
+router.put('/product/review/add', isLoggedIn, addReview)
+router.put('/product/review/delete/:id', isLoggedIn, deleteReview)
 
 module.exports = router

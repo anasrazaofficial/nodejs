@@ -127,6 +127,60 @@ const getProductById = promise(async (req, res, next) => {
     })
 })
 
+const addReview = promise(async (req, res, next) => {
+    const { rating, comment, productId } = req.body
+
+    const review = {
+        user: req.user._id,
+        name: req.user.name,
+        rating: Number(rating),
+        comment
+    }
+
+    const product = await Product.findById(productId)
+
+    const isAlreadyReview = product.reviews.find((rev) => rev.user.toString() === req.user._id.toString())
+    if (isAlreadyReview) {
+        product.reviews.forEach(rev => {
+            if (rev.user.toString() === req.user._id.toString()) {
+                rev.rating = review.rating;
+                rev.comment = review.comment;
+            }
+        })
+    } else {
+        product.reviews.push(review)
+        product.noOfReviews = product.reviews.length
+    }
+
+    product.ratings = product.reviews.reduce((acc, rating) => rating += acc, 0) / product.reviews.length
+
+    await product.save({ validateBeforeSave: false })
+
+    return res.status(200).json({ success: true })
+})
+
+const deleteReview = promise(async (req, res, next) => {
+    const { id } = req.params
+
+    const product = await Product.findById(id)
+
+
+    const reviews = product.reviews.filter((rev) => rev.user.toString() !== req.user._id.toString())
+    const noOfReviews = reviews.length
+    const ratings = noOfReviews > 0 ? reviews.reduce((acc, rating) => rating + acc, 0) / product.reviews.length : 0
+    
+    await Product.findByIdAndUpdate(id, {
+        ratings: Number(ratings),
+        noOfReviews: Number(noOfReviews),
+        reviews
+    }, {
+        new: true,
+        runValidators: true
+    })
+
+    return res.status(200).json({ success: true })
+})
+
 
 module.exports = {
     addProductByAdmin,
@@ -134,5 +188,7 @@ module.exports = {
     updateProductByAdmin,
     deleteProductByAdmin,
     getAllProducts,
-    getProductById
+    getProductById,
+    addReview,
+    deleteReview
 }
