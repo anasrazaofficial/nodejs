@@ -201,13 +201,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 - Now create a file named `swagger.yaml` (that you passed in `fs.readFileSync`)
 
-### Nodemon
-
-Nodemon works on specific files like `.js`, `.jsx`, etc. but if we want to update the list of extensions, we first need to create a file named `nodemon.json` and then add `{ "ext": ".js, .json, .yaml, .jsx" }` in the file
-
->Demo: Click [here](/socialApp/nodemon.json) to go to the code
-
-### Enum
+#### Enum
 
 We can pass enum values in 2 ways:
 
@@ -224,6 +218,12 @@ We can pass enum values in 2 ways:
 ```
 
 >Demo: Click [here](/mydocs/swagger.yaml) to go to the documentation
+
+### Nodemon
+
+Nodemon works on specific files like `.js`, `.jsx`, etc. but if we want to update the list of extensions, we first need to create a file named `nodemon.json` and then add `{ "ext": ".js, .json, .yaml, .jsx" }` in the file
+
+>Demo: Click [here](/socialApp/nodemon.json) to go to the code
 
 ### NPM Packages
 
@@ -433,6 +433,31 @@ Imagine you have a collection of user documents with fields such as username, em
 
 - Validate that phone numbers follow a specific pattern (e.g., "123-456-7890"):\
 `db.users.find({ phone: { $regex: "^[0-9]{3}-[0-9]{3}-[0-9]{4}$" } });`
+
+### Stripe
+
+Some important urls
+
+- [Api keys](https://dashboard.stripe.com/test/apikeys)
+- [Documentation](https://docs.stripe.com/)
+- [Accept payment in documentation](https://docs.stripe.com/payments/accept-a-payment)
+
+#### Methods
+
+1. Go to 'Api keys' and get your `public_key` and `private_key`.
+2. Copy and paste the following code:
+
+```javascript
+const stripe = require('stripe')(`SECRET_KEY`)
+
+const handleStripePayment = async (req, res) => {
+    const paymentIntent = await stripe.paymentIntents.create({
+        amount: `AMOUNT`,
+        currency: `CURRENCY (pkr)`
+    })
+    return res.status(200).send("Payment successful")
+}
+```
 
 ### Some extra points
 
