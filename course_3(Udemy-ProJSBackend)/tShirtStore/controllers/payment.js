@@ -4,7 +4,7 @@ const promise = require('../middlewares/promise')
 const handleStripePayment = promise(async (req, res) => {
     const paymentIntent = await stripe.paymentIntents.create({
         amount: req.body.amount,
-        currency: "pkr"
+        currency: "usd"
     })
 
     return res.status(200).json({
